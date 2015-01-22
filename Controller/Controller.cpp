@@ -13,13 +13,15 @@ void Controller::update(){
     if (state_==OBJECT_DETECT) {
         objDetect *detect;
         detect = new objDetect();
-        detect -> detectObject();
+        detect -> objDetect::detectObject();
         // objDetector -> detectObject();
         // detectObjectの返り値がtrueならstate_をMOTION_DETECTにかえる
-        // state_ = MOTION_DETECT;
+        state_ = MOTION_DETECT;
         
     }else if (state_==MOTION_DETECT){
-    
+        MotionDetector *motion;
+        motion = new MotionDetector();
+        motion -> MotionDetector::detect();
         
         
     }else{ //state_ == ANIMATION
