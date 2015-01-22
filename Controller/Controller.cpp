@@ -11,6 +11,9 @@
 void Controller::update(){
     
     if (state_==OBJECT_DETECT) {
+        objDetect *detect;
+        detect = new objDetect();
+        detect -> detectObject();
         // objDetector -> detectObject();
         // detectObjectの返り値がtrueならstate_をMOTION_DETECTにかえる
         // state_ = MOTION_DETECT;
