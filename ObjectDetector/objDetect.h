@@ -24,6 +24,9 @@ class objDetect{
     
 public:
     
+    objDetect::objDetect(void) {
+        // Constructer
+    }
     
     int getBackImg(){
         
