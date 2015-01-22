@@ -12,6 +12,8 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include <math.h>
+#include "MotionDetector.h"
+#include "objDetector.h"
 #include "RGE.h"
 #include "Frame.h"
 

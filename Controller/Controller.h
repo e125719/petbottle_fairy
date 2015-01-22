@@ -10,6 +10,7 @@
 #define __level7__Controler__
 
 #include <stdio.h>
+#include "App.h"
 
 class Controller{
 public:
