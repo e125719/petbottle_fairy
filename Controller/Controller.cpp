@@ -14,7 +14,6 @@ void Controller::update(){
         objDetect *detect;
         detect = new objDetect();
         detect -> objDetect::detectObject();
-        // objDetector -> detectObject();
         // detectObjectの返り値がtrueならstate_をMOTION_DETECTにかえる
         state_ = MOTION_DETECT;
         
@@ -22,7 +21,8 @@ void Controller::update(){
         MotionDetector *motion;
         motion = new MotionDetector();
         motion -> MotionDetector::detect();
-        
+        // MotionDetector::detectの返り値がtrueならstate_をANIMATIONにかえる
+        state_ = ANIMATION;
         
     }else{ //state_ == ANIMATION
         
