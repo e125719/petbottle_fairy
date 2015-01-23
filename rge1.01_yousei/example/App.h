@@ -91,7 +91,12 @@ public:
 private:
     rge::FrameRef robotbase;
     Fairy fairy_;
+    Controller controller_;
+    MotionDetector objDetector;
+    ObjectDetector motDetector;
     void readTextures();
+    
+    
 };
 
 

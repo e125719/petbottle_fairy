@@ -17,7 +17,7 @@ public:
     Controller(){state_ = OBJECT_DETECT;}
     void update();
     void draw();
-    
+    void init();
 private:
     
     enum STATE {
@@ -27,8 +27,8 @@ private:
     };
     
     STATE state_;
-//   ObjectDetector *objDetector_;
-//   MotionDetector *motDetector_;
+    ObjectDetector *objDetector_;
+    MotionDetector *motDetector_;
     
 };
 

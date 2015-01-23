@@ -59,6 +59,12 @@ void App::init()
     RGE::getInstance()->findMaterial("dress1")->setTexture(liveTexture_);
     
     dummyData(0, 0, 0);
+    
+    //
+    controller = new Controller();
+    objDetector = new ObjectDetect();
+    motDetector = new MotionDetect();
+    controller.init(&objDetector, &motDetector);
 }
 
 

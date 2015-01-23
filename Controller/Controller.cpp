@@ -10,6 +10,7 @@
 
 void Controller::update(){
     
+    
     if (state_==OBJECT_DETECT) {
         objDetect *detect;
         detect = new objDetect();
@@ -34,4 +35,9 @@ void Controller::update(){
 void Controller::draw(){
     // appから呼ぶ
     return;
+}
+
+void Controller::init(ObjectDetecter *object, MotionDetector *motion) {
+    objDetector_ = object;
+    motDetector_ = motion;
 }
