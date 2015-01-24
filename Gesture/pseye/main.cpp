@@ -51,10 +51,9 @@ int main(int argc, const char * argv[]) {
     
     Timer timer;
     
-    detector.initParams(eye.size().width, eye.size().height);
     detector.makeTeacher(eye.size().width, eye.size().height);
     
-    vector<Point2f> trackPSM;
+    vector<Point3f> trackPSM;
 
     
     while(1) {
@@ -75,7 +74,6 @@ int main(int argc, const char * argv[]) {
             bool draw = detector.drawJudging();
             
             if (draw) {
-                detector.rumbleStart();
                 detector.draw(imgDraw);
                 trackPSM = detector.getTrack();
                 //cout << "trackPSM" << trackPSM << endl;

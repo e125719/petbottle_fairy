@@ -27,18 +27,22 @@ class MotionDetector
     int i = 1;
     cv::Point2f prevPos_;
     
-    double vmin_ = 1.0;
-    double distX_, distY_, v_, vmax_ = 0.0;
+    int objWidth_, objHeight_;
+    int winWidth_, winHeight_;
+    
+    double vmin_;
+    double distX_, distY_, v_, vmax_;
     double alpha_ = 0.2;
-    double duration1_ = 0.0, duration2_ = 0.0;
+    double duration1_, duration2_;
     
     std::chrono::system_clock::time_point start1_;
     std::chrono::system_clock::time_point start2_;
     
-    double match2Cir_ = 0.0;  double match2Tri_ = 0.0;    double match2Squa_ = 0.0;
-    bool drawJudge_ = false;
+    double match2Cir_;  double match2Tri_;  double match2Squa_;
+    bool drawJudge_;
     
     std::vector<Point2f> pos_;
+    std::vector<Point3f> track_;
     
     cv::Mat imgLines_;
     cv::Mat grayCircle_, grayTriangle_, graySquare_;
@@ -46,10 +50,47 @@ class MotionDetector
     cv::Mat imgTriangle_;
     cv::Mat imgSquare_;
     
-    PSMove *move = psmove_connect();
+    PSEyeCapture eye;
+    
     
 public:
-    MotionDetector() {}
+    MotionDetector() {
+        objWidth_ = 60; objHeight_ = 200;
+        
+        winWidth_ = eye.size().width;   winHeight_ = eye.size().height;
+        
+        vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
+        distX_ = 0.0;   distY_ = 0.0;
+        
+        start1_ = std::chrono::system_clock::now();
+        duration1_ = 0.0;   duration2_ = 0.0;
+
+        match2Cir_ = 0.0;   match2Tri_ = 0.0;   match2Squa_ = 0.0;
+        
+        drawJudge_ = false;
+        
+        imgLines_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgCircle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgTriangle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgSquare_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        MotionDetector::makeTeacher(winWidth_, winHeight_);
+    }
+    
+    void init() {
+        objWidth_ = 60; objHeight_ = 200;
+        
+        winWidth_ = eye.size().width;   winHeight_ = eye.size().height;
+        
+        vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
+        distX_ = 0.0;   distY_ = 0.0;
+        
+        start1_ = std::chrono::system_clock::now();
+        duration1_ = 0.0;   duration2_ = 0.0;
+        
+        match2Cir_ = 0.0;   match2Tri_ = 0.0;   match2Squa_ = 0.0;
+        
+        drawJudge_ = false;
+    }
     
     void setThreshold(float t) { thre_ = t; }
     
@@ -65,15 +106,6 @@ public:
         
         prevPos_ = pos;
         return true;
-    }
-    
-    void initParams(int width, int height) {
-        imgLines_ = cv::Mat::zeros(height, width, CV_8UC3);
-        imgCircle_ = cv::Mat::zeros(height, width, CV_8UC3);
-        imgTriangle_ = cv::Mat::zeros(height, width, CV_8UC3);
-        imgSquare_ = cv::Mat::zeros(height, width, CV_8UC3);
-        
-        start1_ = std::chrono::system_clock::now();
     }
     
     void draw(cv::Mat& img) {
@@ -102,7 +134,6 @@ public:
         }
         
         if (duration1_ > 2.0 && vmin_ < v_) {
-            //rumble();
             cout << "DRAWING" << endl;
             drawJudge_ = true;
             start2_ = std::chrono::system_clock::now();
@@ -168,13 +199,24 @@ public:
     }
     
     
-    std::vector<Point2f> getTrack() {
+    std::vector<Point3f> getTrack() {
         //cout << "motion" << motion_ << endl;
-        return motion_;
-    }
-    
-    void rumbleStart() {
-        psmove_set_rumble(move, 255*(i%2));
+        for (int i=0; i<motion_.size(); i++) {
+            if (motion_[i].y < winHeight_/2) {
+                if (motion_[i].x > winWidth_/2 - objWidth_/2 && motion_[i].x < winWidth_/2 + objWidth_/2) {
+                    track_[i].x = -100.0;
+                    track_[i].y = -100.0;
+                    track_[i].z = 0.0;
+                }
+            }else{
+                track_[i].x = motion_[i].x;
+                track_[i].y = motion_[i].y;
+                track_[i].z = (objHeight_ / motion_.size()) * (i+1);
+            }
+        }
+
+        //cout << "track" << track_ << endl;
+        return track_;
     }
 };
 

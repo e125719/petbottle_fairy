@@ -10,31 +10,31 @@
 	<string>pseye_</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CFED605E5E01E07559A162DE739C66D802D06FAA</key>
-		<string>ssh://assam.tea.ie.u-ryukyu.ac.jp/home/yuhei/git/pseyedriver</string>
+		<key>E1EE7FFC95672E84887B7840DE115F158B164B77</key>
+		<string>https://github.com/e125719/petbottle_fairy.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>pseye_.xcodeproj</string>
+	<string>Gesture/pseye_.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CFED605E5E01E07559A162DE739C66D802D06FAA</key>
-		<string>../..</string>
+		<key>E1EE7FFC95672E84887B7840DE115F158B164B77</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://assam.tea.ie.u-ryukyu.ac.jp/home/yuhei/git/pseyedriver</string>
+	<string>https://github.com/e125719/petbottle_fairy.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CFED605E5E01E07559A162DE739C66D802D06FAA</string>
+	<string>E1EE7FFC95672E84887B7840DE115F158B164B77</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CFED605E5E01E07559A162DE739C66D802D06FAA</string>
+			<string>E1EE7FFC95672E84887B7840DE115F158B164B77</string>
 			<key>IDESourceControlWCCName</key>
-			<string>psmove</string>
+			<string>petbottle_fairy</string>
 		</dict>
 	</array>
 </dict>
