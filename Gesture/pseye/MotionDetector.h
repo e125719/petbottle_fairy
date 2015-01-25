@@ -42,7 +42,7 @@ class MotionDetect
     bool drawJudge_;
     
     std::vector<Point2f> pos_;
-    std::vector<Point3f> track_;
+    std::vector<Point2f> track1_, track2_;
     
     cv::Mat imgLines_;
     cv::Mat grayCircle_, grayTriangle_, graySquare_;
@@ -199,24 +199,27 @@ public:
     }
     
     
-    std::vector<Point3f> getTrack() {
+    std::vector<Point2f> getTrack() {
         //cout << "motion" << motion_ << endl;
         for (int i=0; i<motion_.size(); i++) {
             if (motion_[i].y < winHeight_/2) {
                 if (motion_[i].x > winWidth_/2 - objWidth_/2 && motion_[i].x < winWidth_/2 + objWidth_/2) {
-                    track_[i].x = -100.0;
-                    track_[i].y = -100.0;
-                    track_[i].z = 0.0;
+                    track1_[i].x = -100.0;
+                    track1_[i].y = -100.0;
+                    //track1_[i].z = 0.0;
+                    
+                    track2_[i].x = -100.0;
+                    track2_[i].y = -100.0;
                 }
             }else{
-                track_[i].x = motion_[i].x;
-                track_[i].y = motion_[i].y;
-                track_[i].z = (objHeight_ / motion_.size()) * (i+1);
+                track1_.push_back(motion_[i]);
+                track2_.push_back(motion_[i]);
+                track2_[i].y = (objHeight_ / motion_.size()) * (i+1);
             }
         }
 
-        //cout << "track" << track_ << endl;
-        return track_;
+        //cout << "track" << track1_ << endl;
+        return track1_;
     }
 };
 
