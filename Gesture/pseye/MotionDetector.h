@@ -19,7 +19,7 @@
 #include "psmove.h"
 
 
-class MotionDetector
+class MotionDetect
 {
     std::vector<cv::Point2f> motion_;
     
@@ -54,7 +54,7 @@ class MotionDetector
     
     
 public:
-    MotionDetector() {
+    MotionDetect() {
         objWidth_ = 60; objHeight_ = 200;
         
         winWidth_ = eye.size().width;   winHeight_ = eye.size().height;
@@ -73,7 +73,7 @@ public:
         imgCircle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
         imgTriangle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
         imgSquare_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
-        MotionDetector::makeTeacher(winWidth_, winHeight_);
+        MotionDetect::makeTeacher(winWidth_, winHeight_);
     }
     
     void init() {

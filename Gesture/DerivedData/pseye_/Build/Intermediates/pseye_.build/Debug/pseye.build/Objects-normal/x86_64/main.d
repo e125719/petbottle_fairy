@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/main.cpp \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/main.cpp \
   /usr/local/include/opencv2/opencv.hpp \
   /usr/local/include/opencv2/core.hpp \
   /usr/local/include/opencv2/core/cvdef.h \
@@ -35,14 +35,14 @@ dependencies: \
   /usr/local/include/opencv2/videoio.hpp \
   /usr/local/include/opencv2/highgui.hpp \
   /usr/local/include/opencv2/ml.hpp \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/psmove/psmove_config.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/PSEyeCapture.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye_driver/ps3eyedriver.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye_driver/ps3eye.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/psmove/psmove_config.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/PSEyeCapture.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye_driver/ps3eyedriver.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye_driver/ps3eye.h \
   /usr/local/include/libusb-1.0/libusb.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/PSMoveTracker.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/psmove/psmove.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/Labeling.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/MotionTracker.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/MotionDetector.h \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/pseye/Timer.h
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/PSMoveTracker.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/psmove/psmove.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/Labeling.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/MotionTracker.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/MotionDetector.h \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/Timer.h

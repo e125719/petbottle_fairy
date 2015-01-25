@@ -45,16 +45,13 @@ int main(int argc, const char * argv[]) {
     PSMoveTracker tracker;
     tracker.init();
     tracker.setThreshold(50);
-    MotionDetector detector;
+    MotionDetect detect;
     
     tracker.calibrate(eye);
     
     Timer timer;
     
-    detector.makeTeacher(eye.size().width, eye.size().height);
-    
-    vector<Point3f> trackPSM;
-
+    detect.makeTeacher(eye.size().width, eye.size().height);
     
     while(1) {
         
@@ -65,21 +62,21 @@ int main(int argc, const char * argv[]) {
         if(!img.empty()) {
             
             tracker.track(img);
-            detector.detect(tracker);
+            detect.detect(tracker);
             
-            detector.draw(img);
+            detect.draw(img);
 
             imshow("preview", img);
 
-            bool draw = detector.drawJudging();
+            bool draw = detect.drawJudging();
             
             if (draw) {
-                detector.draw(imgDraw);
-                trackPSM = detector.getTrack();
+                detect.draw(imgDraw);
+                detect.getTrack();
                 //cout << "trackPSM" << trackPSM << endl;
             }
             
-            int dtcShape = detector.matching(imgDraw);
+            int dtcShape = detect.matching(imgDraw);
             
             if (dtcShape == 1) {
                 // Gesture is CIRCLE
@@ -99,3 +96,80 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
+
+// class
+class MotionDetector {
+    int camWidth_, camHeight_;
+    int dtcShape_;
+    bool judgeDraw_;
+    PSEyeCapture eye;
+    PSMoveTracker tracker;
+    MotionDetect detect;
+    Timer timer;
+    
+public:
+    MotionDetector() {
+        #if DO_PAIRING
+        PSMoveTracker::pair();
+        #endif
+        
+        eye.open(320*2,240*2);
+        setupEye(eye);
+        
+        camWidth_ = eye.size().width;
+        camHeight_ = eye.size().height;
+        
+        tracker.init();
+        tracker.setThreshold(50);
+        tracker.calibrate(eye);
+    }
+    
+    void setupEye(PSEyeCapture& eye)
+    {
+        eye.driver()->setGain(10);
+        eye.driver()->setExposure(20);
+        eye.driver()->setAutoWhiteBalance(0);
+        eye.driver()->setBlueBalance(120);
+        eye.driver()->setRedBalance(120);
+    }
+    
+    bool MotionDetecting() {
+        while(1) {
+            Mat img_;
+            Mat imgDraw_ = Mat::zeros(camWidth_, camHeight_, CV_8UC3);
+            
+            eye >> img_;
+            
+            if (!img_.empty()) {
+                tracker.track(img_);
+                detect.detect(tracker);
+                
+                detect.draw(img_);
+                imshow("preview", img_);
+                
+                judgeDraw_ = detect.drawJudging();
+                
+                if (judgeDraw_) {
+                    detect.draw(imgDraw_);
+                }
+                
+                dtcShape_ = detect.matching(img_);
+                
+                if (dtcShape_ == 1) {
+                    cout << "Circle" << endl;
+                }else if (dtcShape_ == 2) {
+                    cout << "Triangle" << endl;
+                }else if (dtcShape_ == 3) {
+                    cout << "Square" << endl;
+                }
+                
+                imshow("draw", imgDraw_);
+            }
+            
+            waitKey(1);
+        }
+        
+        return false;
+    }
+};

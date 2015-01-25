@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/nagakuratakahiro/lecture/jikken/AR班/workspace/psmove/psmove/daemon/moved_monitor.c
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/psmove/daemon/moved_monitor.c
