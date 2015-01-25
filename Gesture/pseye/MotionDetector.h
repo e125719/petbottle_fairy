@@ -28,7 +28,6 @@ class MotionDetect
     cv::Point2f prevPos_;
     
     int objWidth_, objHeight_;
-    int winWidth_, winHeight_;
     
     double vmin_;
     double distX_, distY_, v_, vmax_;
@@ -40,9 +39,8 @@ class MotionDetect
     
     double match2Cir_;  double match2Tri_;  double match2Squa_;
     bool drawJudge_;
-    
     std::vector<Point2f> pos_;
-    std::vector<Point2f> track1_, track2_;
+    std::vector<Point2f> track_, track1_, track2_;
     
     cv::Mat imgLines_;
     cv::Mat grayCircle_, grayTriangle_, graySquare_;
@@ -51,13 +49,12 @@ class MotionDetect
     cv::Mat imgSquare_;
     
     PSEyeCapture eye;
-    
+    int winWidth_ = eye.size().width;
+    int winHeight_ = eye.size().height;
     
 public:
     MotionDetect() {
         objWidth_ = 60; objHeight_ = 200;
-        
-        winWidth_ = eye.size().width;   winHeight_ = eye.size().height;
         
         vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
         distX_ = 0.0;   distY_ = 0.0;
@@ -73,13 +70,12 @@ public:
         imgCircle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
         imgTriangle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
         imgSquare_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        
         MotionDetect::makeTeacher(winWidth_, winHeight_);
     }
     
     void init() {
         objWidth_ = 60; objHeight_ = 200;
-        
-        winWidth_ = eye.size().width;   winHeight_ = eye.size().height;
         
         vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
         distX_ = 0.0;   distY_ = 0.0;
@@ -136,6 +132,7 @@ public:
         if (duration1_ > 2.0 && vmin_ < v_) {
             cout << "DRAWING" << endl;
             drawJudge_ = true;
+            track_ = motion_;
             start2_ = std::chrono::system_clock::now();
             
             if (vmax_ < v_) {
@@ -153,10 +150,10 @@ public:
             start2_ = chrono::system_clock::now();
         }
         
-        if (duration2_ > 1.0) {
+        if (duration2_ > 1.0 && drawJudge_ == true) {
             cout << "FINISH" << endl;
+            getTrack();
             drawJudge_ = false;
-            start2_ = chrono::system_clock::now();
             duration2_ = 0.0;
         }
         
@@ -200,10 +197,10 @@ public:
     
     
     std::vector<Point2f> getTrack() {
-        //cout << "motion" << motion_ << endl;
-        for (int i=0; i<motion_.size(); i++) {
-            if (motion_[i].y < winHeight_/2) {
-                if (motion_[i].x > winWidth_/2 - objWidth_/2 && motion_[i].x < winWidth_/2 + objWidth_/2) {
+        //cout << "track" << track_ << endl;
+        for (int i=0; i<track_.size(); i++) {
+            if (track_[i].y < winHeight_/2) {
+                if (track_[i].x > winWidth_/2 - objWidth_/2 && track_[i].x < winWidth_/2 + objWidth_/2) {
                     track1_[i].x = -100.0;
                     track1_[i].y = -100.0;
                     //track1_[i].z = 0.0;
@@ -212,13 +209,16 @@ public:
                     track2_[i].y = -100.0;
                 }
             }else{
-                track1_.push_back(motion_[i]);
+                track1_.push_back(track_[i]);
+                
                 track2_.push_back(motion_[i]);
-                track2_[i].y = (objHeight_ / motion_.size()) * (i+1);
+                track2_[i].y = (objHeight_ / track_.size()) * (i+1);
             }
         }
-
-        //cout << "track" << track1_ << endl;
+        
+        //cout << "track1_ = " << track1_ << endl;
+        //cout << "track2_ = " << track2_ << endl;
+        
         return track1_;
     }
 };

@@ -72,21 +72,24 @@ int main(int argc, const char * argv[]) {
             
             if (draw) {
                 detect.draw(imgDraw);
-                detect.getTrack();
                 //cout << "trackPSM" << trackPSM << endl;
             }
             
-            int dtcShape = detect.matching(imgDraw);
             
-            if (dtcShape == 1) {
-                // Gesture is CIRCLE
-                cout << "Circle" << endl;
-            }else if (dtcShape == 2) {
-                // Gesture is TRIANGLE
-                cout << "Triangle" << endl;
-            }else if (dtcShape == 3) {
-                // Gesture is SQUARE
-                cout << "Square" << endl;
+
+            {
+                int dtcShape = detect.matching(imgDraw);
+                
+                if (dtcShape == 1) {
+                    // Gesture is CIRCLE
+                    cout << "Circle" << endl;
+                }else if (dtcShape == 2) {
+                    // Gesture is TRIANGLE
+                    cout << "Triangle" << endl;
+                }else if (dtcShape == 3) {
+                    // Gesture is SQUARE
+                    cout << "Square" << endl;
+                }
             }
             
             imshow("draw", imgDraw);
