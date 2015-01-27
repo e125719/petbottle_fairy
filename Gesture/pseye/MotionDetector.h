@@ -40,7 +40,7 @@ class MotionDetect
     double match2Cir_;  double match2Tri_;  double match2Squa_;
     bool drawJudge_;
     std::vector<Point2f> pos_;
-    std::vector<Point2f> track_;
+    std::vector<Point2f> track_, trackDraw_;
     std::vector<Point3f> track1_;
     
     cv::Mat imgLines_;
@@ -48,11 +48,7 @@ class MotionDetect
     cv::Mat imgCircle_;
     cv::Mat imgTriangle_;
     cv::Mat imgSquare_;
-    
-    PSEyeCapture eye;
-    int winWidth_ = eye.size().width;
-    int winHeight_ = eye.size().height;
-    
+        
 public:
     MotionDetect() {
         objWidth_ = 60; objHeight_ = 200;
@@ -66,16 +62,9 @@ public:
         match2Cir_ = 0.0;   match2Tri_ = 0.0;   match2Squa_ = 0.0;
         
         drawJudge_ = false;
-        
-        imgLines_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
-        imgCircle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
-        imgTriangle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
-        imgSquare_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
-        
-        MotionDetect::makeTeacher(winWidth_, winHeight_);
     }
     
-    void init() {
+    void init(int winWidth_, int winHeight_) {
         objWidth_ = 60; objHeight_ = 200;
         
         vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
@@ -87,6 +76,11 @@ public:
         match2Cir_ = 0.0;   match2Tri_ = 0.0;   match2Squa_ = 0.0;
         
         drawJudge_ = false;
+        
+        imgLines_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgCircle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgTriangle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgSquare_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
     }
     
     void setThreshold(float t) { thre_ = t; }
@@ -105,13 +99,13 @@ public:
         return true;
     }
     
-    void draw(cv::Mat& img) {
+    void draw(cv::Mat img_) {
         for(int i=0; i<(int)motion_.size()-1; ++i) {
-            cv::line(img, motion_[i], motion_[i+1], Scalar::all(255));
+            cv::line(img_, motion_[i], motion_[i+1], Scalar::all(255));
         }
     }
     
-    bool drawJudging() {
+    bool drawJudging(int haba_, int takasa_) {
         if ((int)motion_.size() > 1) {
             distX_ = motion_[(int)motion_.size()-1].x - motion_[(int)motion_.size()-2].x;
             distY_ = motion_[(int)motion_.size()-1].y - motion_[(int)motion_.size()-2].y;
@@ -153,7 +147,7 @@ public:
         
         if (duration2_ > 1.0 && drawJudge_ == true) {
             cout << "FINISH" << endl;
-            getTrack();
+            getTrack(haba_, takasa_);
             drawJudge_ = false;
             duration2_ = 0.0;
         }
@@ -161,12 +155,12 @@ public:
         return drawJudge_;
     }
     
-    int matching(cv::Mat& drawImage) {
-        cvtColor(drawImage, drawImage, COLOR_RGB2GRAY);
+    int matching(cv::Mat drawImage_) {
+        cvtColor(drawImage_, drawImage_, COLOR_RGB2GRAY);
         
-        match2Cir_ = matchShapes(drawImage, grayCircle_, 1, 0);
-        match2Tri_ = matchShapes(drawImage, grayTriangle_, 1, 0);
-        match2Squa_ = matchShapes(drawImage, graySquare_, 1, 0);
+        match2Cir_ = matchShapes(drawImage_, grayCircle_, 1, 0);
+        match2Tri_ = matchShapes(drawImage_, grayTriangle_, 1, 0);
+        match2Squa_ = matchShapes(drawImage_, graySquare_, 1, 0);
         
         if (match2Cir_ < match2Tri_ && match2Cir_ < match2Squa_) {
             return 1;
@@ -179,8 +173,8 @@ public:
         return 0;
     }
     
-    void makeTeacher(int width, int height) {
-        circle(imgCircle_, Point(width/2,height/2), 200, Scalar::all(255));
+    void makeTeacher(int width_, int height_) {
+        circle(imgCircle_, Point(width_/2,height_/2), 200, Scalar::all(255));
         
         cv::Point pt[3];
         pt[0] = cv::Point(320,100);  pt[1] = cv::Point(100,380);  pt[2] = cv::Point(540,380);
@@ -198,14 +192,14 @@ public:
     
     
     
-    std::vector<Point3f> getTrack() {
+    std::vector<Point3f> getTrack(int drawImgWidth_, int drawImgHeight_) {
         //cout << "track" << track_ << endl;
         
         std::vector<Point3f> track1_(track_.size());
         
         for (int i=0; i<track_.size(); i++) {
-            if (track_[i].y < winHeight_/2) {
-                if (track_[i].x > winWidth_/2 - objWidth_/2 && track_[i].x < winWidth_/2 + objWidth_/2) {
+            if (track_[i].y < drawImgHeight_/2) {
+                if (track_[i].x > drawImgWidth_/2 - objWidth_/2 && track_[i].x < drawImgWidth_/2 + objWidth_/2) {
                     track1_[i].x = -100.0;
                     track1_[i].y = -100.0;
                     track1_[i].z = 0.0;
@@ -225,7 +219,7 @@ public:
         }
         
         cout << "track1_ = " << track1_ << endl;
-        //cout << "track2_ = " << track2_ << endl;
+        cout << "track_ = " << track_ << endl;
         
         return track1_;
     }

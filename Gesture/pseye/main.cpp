@@ -49,13 +49,18 @@ int main(int argc, const char * argv[]) {
     
     tracker.calibrate(eye);
     
+    int camWidth = eye.size().width;
+    int camHeight = eye.size().height;
+    
     Timer timer;
     
-    detect.makeTeacher(eye.size().width, eye.size().height);
+    detect.init(camWidth, camHeight);
+    
+    detect.makeTeacher(camWidth, camHeight);
     
     while(1) {
         
-        Mat img, imgDraw = Mat::zeros(eye.size().height, eye.size().width, CV_8UC3);
+        Mat img, imgDraw = Mat::zeros(camHeight, camWidth, CV_8UC3);
         
         eye >> img;
         
@@ -68,29 +73,24 @@ int main(int argc, const char * argv[]) {
 
             imshow("preview", img);
 
-            bool draw = detect.drawJudging();
+            bool draw = detect.drawJudging(camWidth, camHeight);
             
             if (draw) {
                 detect.draw(imgDraw);
-                //cout << "trackPSM" << trackPSM << endl;
             }
-            
-            
 
-            {
-                int dtcShape = detect.matching(imgDraw);
+           int dtcShape = detect.matching(imgDraw);
                 
-                if (dtcShape == 1) {
-                    // Gesture is CIRCLE
-                    cout << "Circle" << endl;
-                }else if (dtcShape == 2) {
-                    // Gesture is TRIANGLE
-                    cout << "Triangle" << endl;
-                }else if (dtcShape == 3) {
-                    // Gesture is SQUARE
-                    cout << "Square" << endl;
-                }
-            }
+           if (dtcShape == 1) {
+               // Gesture is CIRCLE
+               cout << "Circle" << endl;
+           }else if (dtcShape == 2) {
+               // Gesture is TRIANGLE
+               cout << "Triangle" << endl;
+           }else if (dtcShape == 3) {
+               // Gesture is SQUARE
+               cout << "Square" << endl;
+           }
             
             imshow("draw", imgDraw);
         }
@@ -102,10 +102,12 @@ int main(int argc, const char * argv[]) {
 
 
 // class
+/*
 class MotionDetector {
     int camWidth_, camHeight_;
     int dtcShape_;
     bool judgeDraw_;
+    
     PSEyeCapture eye;
     PSMoveTracker tracker;
     MotionDetect detect;
@@ -176,3 +178,4 @@ public:
         return false;
     }
 };
+*/
