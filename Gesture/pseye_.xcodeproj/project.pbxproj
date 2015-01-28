@@ -19,6 +19,8 @@
 		048B46A01A4F03010069CD87 /* psmove_osxsupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B469F1A4F03010069CD87 /* psmove_osxsupport.m */; };
 		048B46AD1A4F062D0069CD87 /* moved_client.c in Sources */ = {isa = PBXBuildFile; fileRef = 048B46A81A4F062D0069CD87 /* moved_client.c */; };
 		048B46AE1A4F062D0069CD87 /* moved_monitor.c in Sources */ = {isa = PBXBuildFile; fileRef = 048B46AA1A4F062D0069CD87 /* moved_monitor.c */; };
+		6AFF04651A78D3D800ED5ACF /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AFF04631A78D3D800ED5ACF /* Controller.cpp */; };
+		6AFF04691A78D42100ED5ACF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AFF04671A78D42100ED5ACF /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +68,10 @@
 		04E114251A4D8FDE00B47C8A /* libopencv_highgui.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.3.0.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_highgui.3.0.0.dylib; sourceTree = "<group>"; };
 		04E114281A4D991A00B47C8A /* libopencv_imgproc.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.0.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgproc.3.0.0.dylib; sourceTree = "<group>"; };
 		6ABAD7E71A78BBB600126E76 /* MotDetecting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotDetecting.h; sourceTree = "<group>"; };
+		6AFF04631A78D3D800ED5ACF /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		6AFF04641A78D3D800ED5ACF /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		6AFF04671A78D42100ED5ACF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6AFF04681A78D42100ED5ACF /* objDetect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objDetect.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,8 @@
 		04E113871A4D7E4100B47C8A = {
 			isa = PBXGroup;
 			children = (
+				6AFF04661A78D40700ED5ACF /* ObjectDetector */,
+				6AFF04621A78D28100ED5ACF /* Controller */,
 				04E1141E1A4D859C00B47C8A /* IOKit.framework */,
 				04E1141C1A4D859700B47C8A /* CoreFoundation.framework */,
 				04E1141A1A4D858B00B47C8A /* Cocoa.framework */,
@@ -159,6 +167,24 @@
 				048B466C1A4EBE150069CD87 /* pseye */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6AFF04621A78D28100ED5ACF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AFF04631A78D3D800ED5ACF /* Controller.cpp */,
+				6AFF04641A78D3D800ED5ACF /* Controller.h */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		6AFF04661A78D40700ED5ACF /* ObjectDetector */ = {
+			isa = PBXGroup;
+			children = (
+				6AFF04671A78D42100ED5ACF /* main.cpp */,
+				6AFF04681A78D42100ED5ACF /* objDetect.h */,
+			);
+			name = ObjectDetector;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,9 +247,11 @@
 				048B46AD1A4F062D0069CD87 /* moved_client.c in Sources */,
 				048B467E1A4EF2AA0069CD87 /* ps3eye.cpp in Sources */,
 				048B46A01A4F03010069CD87 /* psmove_osxsupport.m in Sources */,
+				6AFF04691A78D42100ED5ACF /* main.cpp in Sources */,
 				048B467F1A4EF2AA0069CD87 /* ps3eyedriver.cpp in Sources */,
 				048B469C1A4F02930069CD87 /* psmove.c in Sources */,
 				048B46991A4F02930069CD87 /* psmove_calibration.c in Sources */,
+				6AFF04651A78D3D800ED5ACF /* Controller.cpp in Sources */,
 				048B469A1A4F02930069CD87 /* psmove_orientation.c in Sources */,
 				048B466F1A4EBE150069CD87 /* main.cpp in Sources */,
 			);

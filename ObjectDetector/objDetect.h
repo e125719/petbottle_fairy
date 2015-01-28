@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class objDetect{
+class ObjDetect{
     
     cv::Mat backImg;
     cv::Mat frame;
@@ -24,7 +24,7 @@ class objDetect{
     
 public:
     
-    objDetect::objDetect(void) {
+    objDetect(void) {
         // Constructer
     }
     
@@ -49,7 +49,7 @@ public:
     }
     
     
-    int detectObject(){
+    bool detectObject(){
         cv::VideoCapture cap1(0);
         if (!cap1.isOpened())
         {
@@ -77,9 +77,9 @@ public:
         }
         
         if(area1 > 1000)
-            return 1;
+            return true;
         else
-            return 0;
+            return false;
         
     }
     
@@ -119,9 +119,9 @@ public:
     }
     
     float getPosition(){
-    
+        
         return cx;
-    
+        
     }
     
     

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <objDetect.h>
+#include "objDetect.h"
 
 using namespace std;
 using namespace cv;
@@ -7,7 +7,6 @@ using namespace cv;
 int main(int argc, char *argv[])
 {
     objDetect detector;
-    int t=0;
     
     detector.getBackImg();
     
@@ -15,17 +14,11 @@ int main(int argc, char *argv[])
     cout << "please press key" << endl;
     
     getchar();
+    
+    detector.detectObject();
 
-    t = detector.detectObject();
-    
-    if((t=0)){
-        detector.detectObject();
-    }
-    else{
-        detector.makeTexture();
-    }
-    
-    
+    detector.makeTexture();
+
     detector.getTexture();
     
     detector.getPosition();

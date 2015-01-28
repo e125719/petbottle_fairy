@@ -8,25 +8,24 @@
 
 #include "Controller.h"
 
+
 void Controller::update(){
     
     
     if (state_==OBJECT_DETECT) {
-        objDetect *detect;
-        detect = new objDetect();
-        detect -> objDetect::detectObject();
-        // detectObjectの返り値がtrueならstate_をMOTION_DETECTにかえる
-        state_ = MOTION_DETECT;
+        
+        if(objDetector_->detectObject()){
+            state_ = MOTION_DETECT;
+        }
         
     }else if (state_==MOTION_DETECT){
-        MotionDetector *motion;
-        motion = new MotionDetector();
-        motion -> MotionDetector::detect();
-        // MotionDetector::detectの返り値がtrueならstate_をANIMATIONにかえる
-        state_ = ANIMATION;
         
+        if(motDetector_->motiondetecting){
+            state_ = ANIMATION;
+        }
     }else{ //state_ == ANIMATION
-        
+        fairy_->setTrack(motDetector_->getTrack());
+        fairy_->setTexture(objDetector_->getTexture());
         
     }
     
@@ -37,7 +36,8 @@ void Controller::draw(){
     return;
 }
 
-void Controller::init(ObjectDetecter *object, MotionDetector *motion) {
+void Controller::init(ObjDetect *object,MotionDetect *motion, Fairy *fairy) {
     objDetector_ = object;
     motDetector_ = motion;
+    fairy_ = fairy;
 }

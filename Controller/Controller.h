@@ -10,6 +10,8 @@
 #define __level7__Controler__
 
 #include <stdio.h>
+#include "ObjDetect.h"
+#include "MotionDetector.h"
 #include "App.h"
 
 class Controller{
@@ -17,18 +19,20 @@ public:
     Controller(){state_ = OBJECT_DETECT;}
     void update();
     void draw();
-    void init();
+    void init(ObjDetect *object,MotionDetect *motion,Fairy *fairy); //初期化
+    
 private:
     
     enum STATE {
-      OBJECT_DETECT,
-      MOTION_DETECT,
-      ANIMATION
+        OBJECT_DETECT,
+        MOTION_DETECT,
+        ANIMATION
     };
     
     STATE state_;
-    ObjectDetector *objDetector_;
-    MotionDetector *motDetector_;
+    ObjDetect *objDetector_;
+    MotionDetect *motDetector_;
+    Fairy *fairy_;
     
 };
 
