@@ -11,6 +11,8 @@
 
 #include <opencv2/opencv.hpp>
 
+using namespace cv;
+
 #include "psmove.h"
 #include "Labeling.h"
 typedef Labeling<uchar, uchar> Labeling8U;

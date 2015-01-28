@@ -16,6 +16,6 @@ class MotionTracker
 public:
     MotionTracker() {}
 
-    virtual Point2f pos() = 0;
+    virtual cv::Point2f pos() = 0;
 };
 #endif

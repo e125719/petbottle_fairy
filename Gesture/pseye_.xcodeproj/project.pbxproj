@@ -146,6 +146,7 @@
 		04E113871A4D7E4100B47C8A = {
 			isa = PBXGroup;
 			children = (
+				6AFF046A1A78D74D00ED5ACF /* Fairy */,
 				6AFF04661A78D40700ED5ACF /* ObjectDetector */,
 				6AFF04621A78D28100ED5ACF /* Controller */,
 				04E1141E1A4D859C00B47C8A /* IOKit.framework */,
@@ -185,6 +186,13 @@
 				6AFF04681A78D42100ED5ACF /* objDetect.h */,
 			);
 			name = ObjectDetector;
+			sourceTree = "<group>";
+		};
+		6AFF046A1A78D74D00ED5ACF /* Fairy */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Fairy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
