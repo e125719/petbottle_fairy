@@ -20,7 +20,7 @@
 
 //#include "Timer.h"
 
-#include "MotDetecting.h";
+#include "MotDetecting.h"
 
 
 #define DO_PAIRING 1
