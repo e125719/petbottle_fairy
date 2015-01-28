@@ -1,5 +1,6 @@
 dependencies: \
   /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/main.cpp \
+  /Users/nagakuratakahiro/lecture/jikken/AR班/petbottle_fairy/Gesture/pseye/MotDetecting.h \
   /usr/local/include/opencv2/opencv.hpp \
   /usr/local/include/opencv2/core.hpp \
   /usr/local/include/opencv2/core/cvdef.h \

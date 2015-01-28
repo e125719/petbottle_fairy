@@ -27,7 +27,8 @@ class MotionDetect
     int i = 1;
     cv::Point2f prevPos_;
     
-    auto objWidth_, objHeight_, objMoment_;
+    int objWidth_, objHeight_;
+    float objMoment_;
     
     double vmin_;
     double distX_, distY_, v_, vmax_;

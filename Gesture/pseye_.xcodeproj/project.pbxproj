@@ -65,6 +65,7 @@
 		04E114241A4D8FDE00B47C8A /* libopencv_core.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.0.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_core.3.0.0.dylib; sourceTree = "<group>"; };
 		04E114251A4D8FDE00B47C8A /* libopencv_highgui.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.3.0.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_highgui.3.0.0.dylib; sourceTree = "<group>"; };
 		04E114281A4D991A00B47C8A /* libopencv_imgproc.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.0.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgproc.3.0.0.dylib; sourceTree = "<group>"; };
+		6ABAD7E71A78BBB600126E76 /* MotDetecting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotDetecting.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 				048B46B51A4F8CFB0069CD87 /* MotionTracker.h */,
 				048B46B21A4F76380069CD87 /* PSMoveTracker.h */,
 				048B46B41A4F8BFA0069CD87 /* MotionDetector.h */,
+				6ABAD7E71A78BBB600126E76 /* MotDetecting.h */,
 			);
 			name = example;
 			path = pseye;
