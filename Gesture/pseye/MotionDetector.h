@@ -27,7 +27,7 @@ class MotionDetect
     int i = 1;
     cv::Point2f prevPos_;
     
-    int objWidth_, objHeight_;
+    auto objWidth_, objHeight_, objMoment_;
     
     double vmin_;
     double distX_, distY_, v_, vmax_;
@@ -48,10 +48,12 @@ class MotionDetect
     cv::Mat imgCircle_;
     cv::Mat imgTriangle_;
     cv::Mat imgSquare_;
-        
+    
+    cv::Mat point_, imgPoint_;
+    
 public:
     MotionDetect() {
-        objWidth_ = 60; objHeight_ = 200;
+        objWidth_ = 0; objHeight_ = 0; objMoment_ = 0.0;
         
         vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
         distX_ = 0.0;   distY_ = 0.0;
@@ -65,7 +67,7 @@ public:
     }
     
     void init(int winWidth_, int winHeight_) {
-        objWidth_ = 60; objHeight_ = 200;
+        objWidth_ = 0; objHeight_ = 0;
         
         vmin_ = 1.0;    v_ = 0.0;   vmax_ = 0.0;
         distX_ = 0.0;   distY_ = 0.0;
@@ -81,6 +83,8 @@ public:
         imgCircle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
         imgTriangle_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
         imgSquare_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        point_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
+        imgPoint_ = cv::Mat::zeros(winHeight_, winWidth_, CV_8UC3);
     }
     
     void setThreshold(float t) { thre_ = t; }
@@ -125,6 +129,7 @@ public:
         }
         
         if (duration1_ > 2.0 && vmin_ < v_) {
+            //rumble();
             cout << "DRAWING" << endl;
             drawJudge_ = true;
             track_ = motion_;
@@ -147,6 +152,7 @@ public:
         
         if (duration2_ > 1.0 && drawJudge_ == true) {
             cout << "FINISH" << endl;
+            //rumble();
             getTrack(haba_, takasa_);
             drawJudge_ = false;
             duration2_ = 0.0;
@@ -198,30 +204,42 @@ public:
         std::vector<Point3f> track1_(track_.size());
         
         for (int i=0; i<track_.size(); i++) {
-            if (track_[i].y < drawImgHeight_/2) {
-                if (track_[i].x > drawImgWidth_/2 - objWidth_/2 && track_[i].x < drawImgWidth_/2 + objWidth_/2) {
+            if (track_[i].x > drawImgWidth_/2 - objWidth_/2 && track_[i].x < drawImgWidth_/2 + objWidth_/2) {
+                if (track_[i].y < drawImgHeight_) {
                     track1_[i].x = -100.0;
                     track1_[i].y = -100.0;
                     track1_[i].z = 0.0;
-                    
-                    //track2_[i].x = -100.0;
-                    //track2_[i].y = -100.0;
                 }
             }else{
-                //track1_.push_back(track_[i]);
                 track1_[i].x = track_[i].x;
                 track1_[i].y = track_[i].y;
                 track1_[i].z = (objHeight_ / track_.size()) * (i+1);
-                
-                //track2_.push_back(motion_[i]);
-                //track2_[i].y = (objHeight_ / track_.size()) * (i+1);
             }
+        }
+        
+        for (int i=0; i<track1_.size(); i++) {
+            cv::circle(imgPoint_, Point(track1_[i].x, track1_[i].z), 3, Scalar::all(255), -1);
+            imshow("Point", imgPoint_);
+            waitKey(1);
         }
         
         cout << "track1_ = " << track1_ << endl;
         cout << "track_ = " << track_ << endl;
         
         return track1_;
+    }
+    
+    /*
+    void rumble() {
+        PSMove* move = PSMoveTracker::returnPsm();
+        psmove_set_rumble(PSMoveTracker::returnPsm(), 2);
+    }
+     */
+    
+    void returnSize(int objWid_, int objHei_, int objMom_) {
+        objWidth_ = objWid_;
+        objHeight_ = objHei_;
+        objMoment_ = objMom_;
     }
 };
 

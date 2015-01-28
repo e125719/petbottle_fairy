@@ -241,6 +241,10 @@ public:
         
         return result;
     }
+    
+    PSMove* returnPsm() {
+        return move;
+    }
 
     Point2f virtual pos() { return pos_; }
 };

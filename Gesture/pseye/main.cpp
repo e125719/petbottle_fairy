@@ -22,7 +22,7 @@ using namespace cv;
 
 
 #define DO_PAIRING 1
-
+/*
 void setupEye(PSEyeCapture& eye)
 {
      eye.driver()->setGain(10);
@@ -99,12 +99,13 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+ */
 
 
 // class
-/*
 class MotionDetector {
     int camWidth_, camHeight_;
+    int objectWid_, objectHei_;
     int dtcShape_;
     bool judgeDraw_;
     
@@ -144,6 +145,8 @@ public:
             Mat img_;
             Mat imgDraw_ = Mat::zeros(camWidth_, camHeight_, CV_8UC3);
             
+            detect.returnSize(objectWid_, objectHei_);
+            
             eye >> img_;
             
             if (!img_.empty()) {
@@ -153,7 +156,7 @@ public:
                 detect.draw(img_);
                 imshow("preview", img_);
                 
-                judgeDraw_ = detect.drawJudging();
+                judgeDraw_ = detect.drawJudging(eye.size().width, eye.size().height);
                 
                 if (judgeDraw_) {
                     detect.draw(imgDraw_);
@@ -163,10 +166,13 @@ public:
                 
                 if (dtcShape_ == 1) {
                     cout << "Circle" << endl;
+                    break;
                 }else if (dtcShape_ == 2) {
                     cout << "Triangle" << endl;
+                    break;
                 }else if (dtcShape_ == 3) {
                     cout << "Square" << endl;
+                    break;
                 }
                 
                 imshow("draw", imgDraw_);
@@ -175,7 +181,6 @@ public:
             waitKey(1);
         }
         
-        return false;
+        return true;
     }
 };
-*/
