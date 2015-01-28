@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class objDetect{
+class ObjDetect{
     
     cv::Mat backImg;
     cv::Mat frame;
@@ -15,7 +15,7 @@ class objDetect{
     cv::Mat texture;
     float area1 = 0;
     float area = 0;
-    cv::Rect brect;
+    cv::Mat brect;
     int roiCnt = 0;
     int i = 0;
     
@@ -24,7 +24,7 @@ class objDetect{
     
 public:
     
-    objDetect(void) {
+    ObjDetect(void) {
         // Constructer
     }
     
@@ -95,18 +95,19 @@ public:
         
         cout << "重心座標（"<< cx << "," << cy << "）" << endl;
         
-        float maxarea = 0;
-        
         for (auto contour = contours.begin(); contour != contours.end(); contour++){
             cv::convexHull(*contour, approx);
             area = cv::contourArea(approx);
-            
-            if (area > maxarea) {
-                maxarea = area;
-                brect = cv::boundingRect(cv::Mat(approx).reshape(2));
+            if (area > 1000.0){
+                cv::Rect brect = cv::boundingRect(cv::Mat(approx).reshape(2));
                 texture = cv::Mat(frame, brect);
+                
+                
+                roiCnt++;
+                if (roiCnt == 99){
+                    break;
+                }
             }
-            
             i++;
         }
     }

@@ -30,6 +30,7 @@ class MotionDetector {
     float objectMom_;
     int dtcShape_;
     bool judgeDraw_;
+    vector<Point3f> tracking_;
     
     PSEyeCapture eye;
     PSMoveTracker tracker;
@@ -78,7 +79,7 @@ public:
                 detect.draw(img_);
                 imshow("preview", img_);
                 
-                judgeDraw_ = detect.drawJudging(camWidth_, camHeight_);
+                judgeDraw_ = detect.drawJudging();
                 
                 /*
                  if (judgeDraw_) {
@@ -106,6 +107,39 @@ public:
         }
         
         return true;
+    }
+    
+    std::vector<Point3f> getTrack() {
+        //cout << "track" << track_ << endl;
+        
+        std::vector<Point3f> track1_(tracking_.size());
+        
+        for (int i=0; i<tracking_.size(); i++) {
+            if (tracking_[i].x > camWidth_/2 - objWidth_/2 && tracking_[i].x < camWidth_/2 + objWidth_/2) {
+                if (tracking_[i].y < camHeight_/2) {
+                    track1_[i].x = -100.0;
+                    track1_[i].y = -100.0;
+                    track1_[i].z = 0.0;
+                }
+            }else{
+                track1_[i].x = tracking_[i].x;
+                track1_[i].y = tracking_[i].y;
+                track1_[i].z = (objHeight_ / tracking_.size()) * (i+1);
+            }
+        }
+        
+        /*
+        for (int i=0; i<track1_.size(); i++) {
+            cv::circle(imgPoint_, Point(track1_[i].x, track1_[i].z), 3, Scalar::all(255), -1);
+            imshow("Point", imgPoint_);
+            waitKey(1);
+        }
+        
+        cout << "track1_ = " << track1_ << endl;
+        cout << "track_ = " << track_ << endl;
+        */
+         
+        return track1_;
     }
 };
 

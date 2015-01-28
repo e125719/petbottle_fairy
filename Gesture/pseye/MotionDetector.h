@@ -110,7 +110,7 @@ public:
         }
     }
     
-    bool drawJudging(int haba_, int takasa_) {
+    bool drawJudging() {
         if ((int)motion_.size() > 1) {
             distX_ = motion_[(int)motion_.size()-1].x - motion_[(int)motion_.size()-2].x;
             distY_ = motion_[(int)motion_.size()-1].y - motion_[(int)motion_.size()-2].y;
@@ -154,7 +154,6 @@ public:
         if (duration2_ > 1.0 && drawJudge_ == true) {
             cout << "FINISH" << endl;
             //rumble();
-            getTrack(haba_, takasa_);
             drawJudge_ = false;
             duration2_ = 0.0;
         }
@@ -195,39 +194,6 @@ public:
         cvtColor(imgCircle_, grayCircle_, COLOR_RGB2GRAY);
         cvtColor(imgTriangle_, grayTriangle_, COLOR_RGB2GRAY);
         cvtColor(imgSquare_, graySquare_, COLOR_RGB2GRAY);
-    }
-    
-    
-    
-    std::vector<Point3f> getTrack(int drawImgWidth_, int drawImgHeight_) {
-        //cout << "track" << track_ << endl;
-        
-        std::vector<Point3f> track1_(track_.size());
-        
-        for (int i=0; i<track_.size(); i++) {
-            if (track_[i].x > drawImgWidth_/2 - objWidth_/2 && track_[i].x < drawImgWidth_/2 + objWidth_/2) {
-                if (track_[i].y < drawImgHeight_) {
-                    track1_[i].x = -100.0;
-                    track1_[i].y = -100.0;
-                    track1_[i].z = 0.0;
-                }
-            }else{
-                track1_[i].x = track_[i].x;
-                track1_[i].y = track_[i].y;
-                track1_[i].z = (objHeight_ / track_.size()) * (i+1);
-            }
-        }
-        
-        for (int i=0; i<track1_.size(); i++) {
-            cv::circle(imgPoint_, Point(track1_[i].x, track1_[i].z), 3, Scalar::all(255), -1);
-            imshow("Point", imgPoint_);
-            waitKey(1);
-        }
-        
-        cout << "track1_ = " << track1_ << endl;
-        cout << "track_ = " << track_ << endl;
-        
-        return track1_;
     }
     
     /*

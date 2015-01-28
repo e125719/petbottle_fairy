@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>08FE4CF4-9C48-46CA-AC5C-D2AFCFF4B86E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>rge_sample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4609E611E12B4BFA1F363EB0155CEF256FE86F55</key>
+		<string>ssh://assam.tea.ie.u-ryukyu.ac.jp/home/yuhei/git/PoseEstimater</string>
+		<key>F0411CC4B40C7627116FC03C9B42D274E19EF4F5</key>
+		<string>ssh://assam/home/yuhei/git/rge</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>xcode/rge_sample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4609E611E12B4BFA1F363EB0155CEF256FE86F55</key>
+		<string>../../../../PoseEstimater</string>
+		<key>F0411CC4B40C7627116FC03C9B42D274E19EF4F5</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://assam/home/yuhei/git/rge</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F0411CC4B40C7627116FC03C9B42D274E19EF4F5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4609E611E12B4BFA1F363EB0155CEF256FE86F55</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PoseEstimater</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F0411CC4B40C7627116FC03C9B42D274E19EF4F5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rge1.01</string>
+		</dict>
+	</array>
+</dict>
+</plist>
