@@ -156,11 +156,13 @@ public:
                 detect.draw(img_);
                 imshow("preview", img_);
                 
-                judgeDraw_ = detect.drawJudging(eye.size().width, eye.size().height);
+                judgeDraw_ = detect.drawJudging(camWidth_, camHeight_);
                 
+                /*
                 if (judgeDraw_) {
                     detect.draw(imgDraw_);
                 }
+                 */
                 
                 dtcShape_ = detect.matching(img_);
                 
@@ -175,7 +177,7 @@ public:
                     break;
                 }
                 
-                imshow("draw", imgDraw_);
+                //imshow("draw", imgDraw_);
             }
             
             waitKey(1);
